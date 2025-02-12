@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: black;
+  color: white;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+@layer base {
+  :root {
+    @apply antialiased;
+  }
+
+  * {
+    @apply border-white/20;
+  }
+}
+
+@keyframes loading-bar {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-loading-bar {
+  animation: loading-bar 3s ease-in-out;
+}
+
+.fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
