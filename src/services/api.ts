@@ -71,4 +71,14 @@ export const salesApi = {
             throw error;
         }
     },
+
+    getSalesAnalytics: async (): Promise<any> => {
+        try {
+            const response = await api.get('/analytics');
+            return response.data;
+        } catch (error) {
+            console.error('Erreur lors de la récupération des analytics :', error);
+            throw error;
+        }
+    },
 };
