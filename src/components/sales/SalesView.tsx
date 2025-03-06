@@ -24,7 +24,9 @@ export function SalesView() {
 
   const fetchSalesData = async () => {
     try {
+      console.log('Fetching sales data...');
       const salesData = await salesApi.getAllSales();
+      console.log('Sales data fetched:', salesData);
       setSales(salesData);
     } catch (error) {
       console.error('Error fetching sales:', error);
@@ -35,7 +37,9 @@ export function SalesView() {
 
   const fetchAnalytics = async () => {
     try {
+      console.log('Fetching analytics data...');
       const analyticsData = await salesApi.getSalesAnalytics();
+      console.log('Analytics data fetched:', analyticsData);
       setAnalytics(analyticsData);
     } catch (error) {
       console.error('Error fetching analytics:', error);
@@ -49,6 +53,7 @@ export function SalesView() {
 
   const handleAddSale = async (newSale: Omit<Sale, '_id'>) => {
     try {
+      console.log('Adding new sale:', newSale);
       await salesApi.createSale(newSale);
       await fetchSalesData();
       await fetchAnalytics();
@@ -61,6 +66,7 @@ export function SalesView() {
   const handleEditSale = async (updatedSale: Partial<Sale>) => {
     try {
       if (selectedSale) {
+        console.log('Editing sale:', updatedSale);
         await salesApi.updateSale(selectedSale._id, updatedSale);
         await fetchSalesData();
         await fetchAnalytics();
@@ -74,6 +80,7 @@ export function SalesView() {
 
   const handleDeleteSale = async (id: string) => {
     try {
+      console.log(`Deleting sale with id ${id}`);
       await salesApi.deleteSale(id);
       await fetchSalesData();
       await fetchAnalytics();
