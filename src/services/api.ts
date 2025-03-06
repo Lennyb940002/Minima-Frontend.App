@@ -23,7 +23,9 @@ api.interceptors.request.use((config) => {
 export const salesApi = {
     getAllSales: async (): Promise<Sale[]> => {
         try {
+            console.log('Fetching all sales from API...');
             const response = await api.get<Sale[]>('/');
+            console.log('Sales fetched successfully:', response.data);
             return response.data;
         } catch (error) {
             console.error('Erreur lors de la récupération des ventes :', error);
@@ -33,7 +35,9 @@ export const salesApi = {
 
     createSale: async (sale: Omit<Sale, '_id'>): Promise<Sale> => {
         try {
+            console.log('Creating new sale:', sale);
             const response = await api.post<Sale>('/', sale);
+            console.log('Sale created successfully:', response.data);
             return response.data;
         } catch (error) {
             console.error('Erreur lors de la création de la vente :', error);
@@ -43,7 +47,9 @@ export const salesApi = {
 
     updateSale: async (id: string, sale: Partial<Omit<Sale, '_id'>>): Promise<Sale> => {
         try {
+            console.log(`Updating sale with id ${id}:`, sale);
             const response = await api.put<Sale>(`/${id}`, sale);
+            console.log('Sale updated successfully:', response.data);
             return response.data;
         } catch (error) {
             console.error('Erreur lors de la mise à jour de la vente :', error);
@@ -53,9 +59,11 @@ export const salesApi = {
 
     updateDecStatus: async (id: string): Promise<Sale> => {
         try {
+            console.log(`Updating decStatus for sale with id ${id}`);
             const response = await api.patch<Sale>(`/${id}/decstatus`, {
                 decStatus: 2
             });
+            console.log('DecStatus updated successfully:', response.data);
             return response.data;
         } catch (error) {
             console.error('Erreur lors de la mise à jour du decStatus:', error);
@@ -65,7 +73,9 @@ export const salesApi = {
 
     deleteSale: async (id: string): Promise<void> => {
         try {
+            console.log(`Deleting sale with id ${id}`);
             await api.delete(`/${id}`);
+            console.log('Sale deleted successfully');
         } catch (error) {
             console.error('Erreur lors de la suppression de la vente :', error);
             throw error;
